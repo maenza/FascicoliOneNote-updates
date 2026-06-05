@@ -30,7 +30,7 @@ Dopo l'installazione, il programma ti avvisa automaticamente quando esce una ver
 ## Cosa fa, in breve
 
 
-1. Legge i file che metti nella cartella `input`
+1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer (con i pulsanti **Aggiungi file/cartella** o trascinandoli) — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
 2. Converte tutto in PDF (o lascia i PDF così come sono)
 3. Apre una finestra dove scegli in quale blocco appunti e sezione di OneNote inserire i documenti
 4. Inserisce ogni documento come pagina separata in OneNote
