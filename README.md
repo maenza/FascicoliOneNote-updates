@@ -247,9 +247,13 @@ Documenti\
 
 ## Versione
 
-**1.0-beta4** — Windows x64 (testata) · ARM64 (sperimentale, non ancora testata)
+**1.0-beta5** — Windows **x64** (beta pubblica)
 
-> La versione **x64** è considerata beta dopo i controlli di sicurezza, stabilità e velocità. La versione **ARM64** è inclusa ma **non è ancora stata provata su hardware reale**: usala solo per test.
+> La beta pubblica è disponibile **solo per Windows x64**. La versione **ARM64** è un progetto separato, **ancora in fase di test e non distribuita**: i test su hardware ARM non hanno dato esito positivo, quindi non viene pubblicata finché non è pronta.
+
+Novità della beta5:
+- **Controllo aggiornamenti integrato:** all'avvio il programma verifica (in modo silenzioso e non bloccante) se è disponibile una versione più recente e, in tal caso, mostra un avviso con il link per scaricarla.
+- **Punto di ripristino con feedback:** durante l'installazione la creazione del punto di ripristino mostra ora una finestra visibile con lo stato di avanzamento (prima girava nascosta e l'installer sembrava bloccato).
 
 Novità della beta4:
 - **Robustezza percorsi:** lo spostamento dei file nel Cestino ora funziona anche se il percorso utente contiene un apostrofo (es. `Dell'Aquila`).
