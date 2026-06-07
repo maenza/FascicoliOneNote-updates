@@ -238,9 +238,15 @@ Documenti\
 
 ## Versione
 
-**1.0-beta6** — Windows **x64** (beta pubblica)
+**1.0-beta7** — Windows **x64** (beta pubblica)
 
 > La beta pubblica è disponibile **solo per Windows x64**. La versione **ARM64** è un progetto separato, **ancora in fase di test e non distribuita**: i test su hardware ARM non hanno dato esito positivo, quindi non viene pubblicata finché non è pronta.
+
+Novità della beta7:
+- **Più scorrevole:** ora si scelgono i file **e** la sezione di OneNote all'inizio, poi conversione e caricamento procedono **da soli**, senza più "Premi Invio" intermedi; a fine operazione la finestra si chiude automaticamente.
+- **Riepilogo finale:** al termine viene mostrato un riepilogo con gli eventuali errori, salvato anche nel file `riepilogo_ultima_operazione.txt` nella cartella del programma.
+- **Avvio automatico di OneNote:** se OneNote non è aperto, viene avviato automaticamente (resta più rapido tenerlo già aperto).
+- **Ripresa dei caricamenti interrotti:** i file vengono caricati e rimossi uno a uno; se l'operazione si interrompe, al riavvio puoi **riprendere** caricando solo i file mancanti — senza doppioni e senza che i file non caricati finiscano nel Cestino.
 
 Novità della beta6:
 - **Stabilità file .msg con .eml allegata:** una PEC inoltrata come `.msg` con la mail originale in allegato `.eml` ora viene elaborata correttamente. Prima causava un errore e l'intero file veniva saltato.
