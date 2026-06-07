@@ -19,16 +19,7 @@
 
 ---
 
-## Scarica il programma
-
-**[Scarica l'ultima versione — FascicoliOneNote_Setup.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup.exe)**
-
-Dopo l'installazione, il programma ti avvisa automaticamente quando esce una versione più recente. L'elenco completo delle versioni con le novità è nella pagina [Releases](https://github.com/maenza/FascicoliOneNote-updates/releases).
-
----
-
 ## Cosa fa, in breve
-
 
 1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer (con i pulsanti **Aggiungi file/cartella** o trascinandoli) — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
 2. Converte tutto in PDF (o lascia i PDF così come sono)
@@ -247,9 +238,13 @@ Documenti\
 
 ## Versione
 
-**1.0-beta5** — Windows **x64** (beta pubblica)
+**1.0-beta6** — Windows **x64** (beta pubblica)
 
 > La beta pubblica è disponibile **solo per Windows x64**. La versione **ARM64** è un progetto separato, **ancora in fase di test e non distribuita**: i test su hardware ARM non hanno dato esito positivo, quindi non viene pubblicata finché non è pronta.
+
+Novità della beta6:
+- **Stabilità file .msg con .eml allegata:** una PEC inoltrata come `.msg` con la mail originale in allegato `.eml` ora viene elaborata correttamente. Prima causava un errore e l'intero file veniva saltato.
+- **Sicurezza email annidate:** aggiunto un limite di profondità (50 livelli) per i messaggi `message/rfc822` annidati. Un file con annidamento eccessivo non causa più un crash; il messaggio più profondo viene allegato come `.eml` originale senza perdita di dati.
 
 Novità della beta5:
 - **Controllo aggiornamenti integrato:** all'avvio il programma verifica (in modo silenzioso e non bloccante) se è disponibile una versione più recente e, in tal caso, mostra un avviso con il link per scaricarla.
