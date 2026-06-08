@@ -1,6 +1,6 @@
 # FascicoliOneNote
 
-**FascicoliOneNote** è uno strumento che converte automaticamente i documenti di un fascicolo (email, PDF, Word, immagini, archivi ZIP/RAR e altro) e li inserisce direttamente nelle pagine di **Microsoft OneNote**, una per ciascun documento.
+**FascicoliOneNote** converte automaticamente i documenti di un fascicolo (email, PDF, Word, allegati PEC, archivi ZIP/RAR e altro) e li inserisce direttamente nelle pagine di **Microsoft OneNote**, una per ciascun documento.
 
 È pensato per chi deve digitalizzare fascicoli cartacei o elettronici e vuole ritrovarli organizzati in OneNote senza dover fare copia-incolla a mano.
 
@@ -19,129 +19,66 @@
 
 ---
 
+## Scarica il programma
+
+| Versione | Piattaforma | Download |
+|---|---|---|
+| **1.0** | Windows x64 (Intel/AMD) | [FascicoliOneNote_Setup.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup.exe) |
+| **1.0** | Windows ARM64 (Surface Pro X, Copilot+ PC) | [FascicoliOneNote_Setup_ARM64.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup_ARM64.exe) |
+
 ## Cosa fa, in breve
 
-1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer (con i pulsanti **Aggiungi file/cartella** o trascinandoli) — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
+1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
 2. Converte tutto in PDF (o lascia i PDF così come sono)
 3. Apre una finestra dove scegli in quale blocco appunti e sezione di OneNote inserire i documenti
 4. Inserisce ogni documento come pagina separata in OneNote
-5. Sposta automaticamente nel Cestino di Windows tutti i file elaborati (sia da `input` che da `output`)
+5. Sposta automaticamente nel Cestino di Windows tutti i file elaborati
 6. Il programma è già pronto per il prossimo fascicolo
+
+Tutto avviene **da un solo avvio**: fai le due scelte iniziali (file + destinazione OneNote), poi il programma procede da solo fino alla fine.
 
 ---
 
 ## Requisiti prima di iniziare
 
 - **Windows 10 o 11**
-- **Microsoft OneNote** installato e aperto (non la versione web — quella da Microsoft 365 o quella inclusa con Office)
+- **Microsoft OneNote** installato (non la versione web — quella da Microsoft 365 o inclusa con Office). Se non è aperto, viene avviato automaticamente.
 - Il programma installato tramite il file `FascicoliOneNote_Setup.exe`
 
-> **Importante:** OneNote deve essere già aperto e il blocco appunti dove vuoi inserire i documenti deve essere visibile prima di avviare lo script. Se OneNote è chiuso, lo script non trova nulla.
+---
+
+## Come si usa
+
+### Avvio
+
+Fai doppio clic su **`fascicolo.bat`** (icona sul desktop o nel menu Start).
+
+Si apre una finestra nera — non chiuderla — e subito dopo la finestra di selezione file.
 
 ---
 
-## Dove si trova il programma dopo l'installazione
+### Scelta 1 — Seleziona i file
 
-L'installer crea la cartella:
-
-```
-Documenti\FascicoliOneNote\
-```
-
-All'interno trovi:
-
-| Cartella / File | A cosa serve |
-|---|---|
-| `input\` | **Qui metti i file da elaborare** |
-| `output\` | Qui vengono salvati i PDF convertiti (temporaneamente) |
-| `fascicolo.bat` | **Questo avvii per la prima fase** — converte i file |
-| `fascicolo.py` | Lo script Python (non aprire direttamente) |
-| `inserisci_onenote.ps1` | **Questo avvii per la seconda fase** — inserisce in OneNote |
-
----
-
-## Come si usa — passo per passo
-
-### Passo 1 — Prepara i file
-
-A partire dalla versione **1.0-alpha11** non serve più copiare i file a mano nella cartella `input`: all'avvio si apre una **finestra grafica** dove scegliere i file da qualsiasi cartella del computer.
+Si apre una finestra grafica con l'elenco dei file da elaborare.
 
 - Pulsante **Aggiungi file…** per scegliere uno o più file
 - Pulsante **Aggiungi cartella…** per aggiungere tutti i file di una cartella
 - **Trascinamento** (drag & drop): puoi trascinare i file direttamente nella finestra
 - Pulsante **Rimuovi selezionati** per togliere i file selezionati dall'elenco
-- Pulsante **Avvia elaborazione** per procedere (in blu, in basso a destra)
+- Pulsante **Avvia elaborazione** (in blu, in basso a destra) per procedere
 - Pulsante **Annulla** per uscire senza fare nulla
 
 Nell'elenco, ogni riga mostra il nome del file e tra parentesi quadre la cartella di origine — utile per riconoscere file con lo stesso nome provenienti da cartelle diverse.
 
-Se premi **Avvia elaborazione** senza aver aggiunto nessun file, appare un avviso e puoi continuare ad aggiungere file.
+> **I tuoi file originali NON vengono toccati:** il programma ne fa una copia di lavoro nella cartella `input` e a fine operazione cancella solo quelle copie.
 
-> **I tuoi file originali NON vengono toccati:** il programma ne fa una copia di lavoro nella cartella `input` e a fine operazione cancella solo quelle copie. Gli originali restano dove sono.
-
-In alternativa puoi ancora copiare i file manualmente nella cartella `input` (vengono pre-caricati nell'elenco):
-
-```
-Documenti\FascicoliOneNote\input\
-```
-
-Puoi aggiungere quanti file vuoi. I formati supportati sono:
-
-- **Email:** `.eml`, `.msg` (inclusi allegati — vengono estratti automaticamente)
-- **Documenti firmati digitalmente:** `.p7m` (firma CAdES/CMS tipica delle PEC — il documento interno viene estratto automaticamente)
-- **Documenti:** `.pdf`, `.docx`, `.doc`, `.rtf`, `.txt`
-- **Immagini:** `.jpg`, `.jpeg`, `.gif`, `.tiff`, `.bmp`, `.png`
-- **Immagini mediche:** `.dcm` (DICOM)
-- **Archivi:** `.zip`, `.rar`, `.arj` (il contenuto viene estratto e convertito)
-- **Pagine web:** `.htm`, `.html`, `.xml`
-- **Video:** `.mp4`, `.avi`, `.mov`, `.wmv` e altri (vengono inseriti come allegati in OneNote)
-- **Audio:** `.mp3`, `.wav`, `.flac` e altri (inseriti come allegati)
-- **Qualsiasi altro formato** — file con estensioni non riconosciute vengono inseriti in OneNote come allegati diretti (cliccabili), senza conversione
+In alternativa puoi copiare i file manualmente nella cartella `input` (vengono pre-caricati nell'elenco).
 
 ---
 
-### Passo 2 — Avvia la conversione
+### Scelta 2 — Scegli la destinazione in OneNote
 
-Fai doppio clic su **`fascicolo.bat`** oppure usa l'icona sul desktop o nel menu Start.
-
-Si apre una finestra nera (il terminale). Lo script inizia ad elaborare i file uno per uno e mostra una barra di avanzamento:
-
-```
-Trovati 12 file. Inizio elaborazione...
-
-Elaborazione file: 100%|████████████| 12/12 [00:45]
-  OK: Lettera_avvocato
-  OK: Contratto_2024
-  OK (PDF diretto): Perizia_tecnica
-  ...
-
-Completato. 12 PDF pronti in: C:\Users\...\output
-
-Premi Invio per continuare...
-```
-
-Quando compare **"Premi Invio per continuare..."**, l'elaborazione è finita. Premi Invio per chiudere la finestra.
-
-> Se vedi messaggi del tipo `ATTENZIONE: formato non supportato`, significa che alcuni file non possono essere convertiti e verranno saltati. Non è un errore bloccante — gli altri file vengono elaborati normalmente.
-
----
-
-### Passo 3 — Apri OneNote
-
-Prima di procedere:
-
-1. Apri **Microsoft OneNote** (non la versione web)
-2. Assicurati che il blocco appunti dove vuoi inserire i documenti sia aperto e visibile
-
-Se OneNote non è aperto, lo script del passo successivo non trova nessun blocco appunti e non può procedere.
-
----
-
-### Passo 4 — Inserisci in OneNote e cancella i file
-
-Questo passo viene avviato **automaticamente** dal `.bat` subito dopo la conversione. Non devi fare nulla di aggiuntivo.
-
-Si apre una piccola finestra con tre campi:
+Subito dopo si apre una piccola finestra:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -156,69 +93,99 @@ Si apre una piccola finestra con tre campi:
 └─────────────────────────────────────────┘
 ```
 
-**Come compilare la finestra:**
-
-- **Blocco appunti** — seleziona dall'elenco il blocco appunti OneNote dove vuoi salvare i documenti
+- **Blocco appunti** — seleziona il blocco appunti OneNote dove vuoi salvare i documenti
 - **Sezione esistente** — se vuoi aggiungere i documenti a una sezione che esiste già, selezionala qui
-- **Oppure crea nuova sezione** — se vuoi creare una sezione nuova (es. il nome del fascicolo), scrivi il nome qui e lascia il campo "Sezione esistente" come sta
+- **Oppure crea nuova sezione** — scrivi il nome di una nuova sezione (es. il nome del fascicolo)
 
-Clicca **Conferma**. Lo script inizia a inserire i PDF in OneNote, uno per pagina, mostrando il progresso nella finestra PowerShell:
+Clicca **Conferma**.
 
-```
-Inserisco 12 PDF in OneNote...
-  -> [1/12] Lettera_avvocato
-     OK (4 pagine)
-  -> [2/12] Contratto_2024
-     OK (12 pagine)
-  ...
-
-Completato! Tutti i file sono stati inseriti in OneNote.
-Premi Invio per chiudere
-```
-
-Quando compare **"Premi Invio per chiudere"**, l'operazione è terminata. Apri OneNote e troverai tutti i documenti inseriti come pagine nella sezione scelta.
+> Se OneNote non era aperto, il programma lo ha già avviato automaticamente in background durante la selezione file.
 
 ---
 
-### Passo 5 — I file vengono spostati nel Cestino
+### Il programma procede da solo
 
-Dopo che hai premuto Invio per chiudere la finestra di OneNote, il programma sposta automaticamente nel **Cestino di Windows** tutti i file nelle cartelle `input` e `output`. La finestra avvisa con un messaggio:
+Dopo la conferma, nella finestra nera scorrono i progressi di conversione e caricamento:
 
 ```
-*** ATTENZIONE ***
-I file elaborati sono stati spostati nel Cestino di Windows.
-Se non ti servono piu', ricordati di svuotare il Cestino
-per liberare spazio su disco.
+Fase 3: Conversione file in PDF...
+
+Trovati 12 file. Inizio elaborazione...
+Elaborazione file: 100%|████████████| 12/12 [00:45]
+  OK: Lettera_avvocato
+  OK: Contratto_2024
+  OK (PDF diretto): Perizia_tecnica
+  ...
+
+Fase 4: Caricamento in OneNote...
+  -> [1/12] Lettera_avvocato — OK (4 pagine)
+  -> [2/12] Contratto_2024  — OK (12 pagine)
+  ...
+
+Fase 5: Spostamento file nel Cestino...
+File spostati nel Cestino.
 ```
 
-I file non sono ancora cancellati definitivamente — sono nel Cestino e puoi recuperarli se necessario. Quando sei sicuro che tutto è andato a buon fine, svuota il Cestino per liberare spazio.
+Al termine la finestra si chiude automaticamente dopo qualche secondo.
 
-Il programma è già pronto per il prossimo fascicolo.
+I file elaborati sono stati spostati nel **Cestino di Windows** — non sono ancora cancellati definitivamente. Quando sei sicuro che tutto è andato a buon fine, svuota il Cestino per liberare spazio.
+
+> **Riepilogo finale:** al termine, nella cartella del programma viene aggiornato il file **`riepilogo_ultima_operazione.txt`** con il dettaglio di tutti i file caricati e gli eventuali errori.
+
+---
+
+## Ripresa di un caricamento interrotto
+
+Se la finestra viene chiusa a metà del caricamento (es. per un crash o un riavvio), i file già caricati sono in OneNote e quelli non ancora caricati restano nella cartella `output`. Al prossimo avvio il programma lo rileva e chiede:
+
+> **"Trovati N file non caricati da un'operazione interrotta. Riprendere?"**
+
+- **Sì** — carica solo i file mancanti (nessun doppione in OneNote)
+- **No** — i file rimasti vengono spostati nel Cestino e si ricomincia da capo
+
+---
+
+## Formati supportati
+
+- **Email:** `.eml`, `.msg` (inclusi allegati — vengono estratti automaticamente)
+- **Documenti firmati digitalmente:** `.p7m` (firma CAdES/CMS tipica delle PEC — il documento interno viene estratto automaticamente)
+- **Documenti:** `.pdf`, `.docx`, `.doc`, `.rtf`, `.txt`
+- **Fogli di calcolo:** `.xlsx`, `.xls`, `.xlsm` (richiede Microsoft Excel installato; se non disponibile, il file viene inserito come allegato)
+- **Immagini:** `.jpg`, `.jpeg`, `.gif`, `.tiff`, `.bmp`, `.png`
+- **Immagini mediche:** `.dcm` (DICOM)
+- **Archivi:** `.zip`, `.rar`, `.arj` (il contenuto viene estratto e convertito; supporta compressione Deflate64 e archivi annidati fino a 8 livelli)
+- **Pagine web:** `.htm`, `.html`, `.xml`
+- **Video:** `.mp4`, `.avi`, `.mov`, `.wmv` e altri (inseriti come allegati in OneNote)
+- **Audio:** `.mp3`, `.wav`, `.flac` e altri (inseriti come allegati)
+- **Qualsiasi altro formato** — inserito in OneNote come allegato diretto (cliccabile), senza conversione
 
 ---
 
 ## Domande frequenti
 
 **I file che metto in `input` vengono cancellati?**
-Sì. Al termine dell'operazione, dopo che hai premuto Invio, i file in `input` e in `output` vengono spostati nel Cestino di Windows. Puoi recuperarli dal Cestino finché non lo svuoti, ma per sicurezza **usa sempre copie** dei file originali, non gli originali stessi.
+Sì. Al termine dell'operazione i file in `input` e in `output` vengono spostati nel Cestino di Windows. Puoi recuperarli dal Cestino finché non lo svuoti, ma per sicurezza **usa sempre copie** dei file originali, non gli originali stessi.
 
 **Ho un'email con molti allegati. Come viene trattata?**
 Lo script apre l'email, estrae il testo del corpo e tutti gli allegati, e li converte. Il risultato è un unico PDF per ogni email, che contiene il testo e tutti gli allegati leggibili uno dopo l'altro.
 
+**Ho un file `.p7m` (allegato PEC con firma digitale). Viene elaborato?**
+Sì. I file `.p7m` contengono un documento con firma CAdES/CMS (tipica delle PEC italiane): il programma estrae automaticamente il documento interno (PDF, Word, ecc.) e lo converte normalmente. I file `.p7s` e `.p7b`, che contengono solo la firma senza documento, vengono invece saltati.
+
 **Ho un file ZIP o RAR con dentro tanti documenti. Come funziona?**
-L'archivio viene estratto automaticamente. Ogni documento trovato dentro viene convertito separatamente. Il risultato è un PDF con tutti i documenti dell'archivio uniti in sequenza.
+L'archivio viene estratto automaticamente. Ogni documento trovato viene convertito separatamente. Sono supportati anche gli ZIP con compressione Deflate64 (il formato usato da «Cartella compressa» di Windows e da 7-Zip) e gli archivi annidati (zip-in-zip), fino a 8 livelli di profondità.
+
+**Ho un foglio Excel. Viene convertito?**
+Sì, se Microsoft Excel è installato sul computer. In caso contrario il file viene inserito in OneNote come allegato cliccabile.
 
 **Cosa succede con i video e gli audio?**
-Non vengono convertiti in PDF. Vengono copiati nella cartella `output` con un prefisso `_video_` o `_audio_` e inseriti in OneNote come file allegati (cliccabili dalla pagina).
+Non vengono convertiti in PDF. Vengono inseriti in OneNote come file allegati cliccabili dalla pagina.
 
 **OneNote dice "chiamata respinta" o vedo messaggi di errore con tentativi?**
-OneNote a volte è occupato mentre elabora la pagina precedente. Lo script lo gestisce automaticamente e riprova fino a 5 volte aspettando qualche secondo tra un tentativo e l'altro. Di solito si risolve da solo.
+OneNote a volte è occupato mentre elabora la pagina precedente. Lo script lo gestisce automaticamente e riprova più volte aspettando qualche secondo tra un tentativo e l'altro. Di solito si risolve da solo.
 
 **Il programma si blocca o non trova Python?**
 Prova a riavviare il computer dopo l'installazione. L'installer aggiunge Python al percorso di sistema e a volte serve un riavvio perché la modifica sia attiva.
-
-**Ho un file `.p7m` (firma digitale PEC). Viene elaborato?**
-Sì. I file `.p7m` sono documenti con firma digitale CMS (tipici delle PEC italiane): il programma estrae automaticamente il documento originale contenuto al loro interno (PDF, Word, ecc.) e lo converte normalmente. I file `.p7s` e `.p7b`, che contengono solo la firma senza documento, vengono invece saltati.
 
 ---
 
@@ -227,51 +194,54 @@ Sì. I file `.p7m` sono documenti con firma digitale CMS (tipici delle PEC itali
 ```
 Documenti\
 └── FascicoliOneNote\
-    ├── input\          ← metti qui i file del fascicolo
-    ├── output\         ← PDF convertiti (temporanei)
-    ├── fascicolo.bat   ← PASSO 1: converti
-    ├── fascicolo.py    ← script Python (non aprire)
-    └── inserisci_onenote.ps1  ← PASSO 2: inserisci in OneNote
+    ├── input\                           ← file del fascicolo (o scelti via GUI)
+    ├── output\                          ← PDF convertiti (temporanei)
+    ├── fascicolo.bat                    ← AVVIA QUESTO per elaborare un fascicolo
+    ├── fascicolo.py                     ← script Python (non aprire direttamente)
+    ├── inserisci_onenote.ps1            ← script PowerShell (non aprire direttamente)
+    └── riepilogo_ultima_operazione.txt  ← log dell'ultima operazione
 ```
 
 ---
 
 ## Versione
 
-**1.0-beta7** — Windows **x64** (beta pubblica)
+**1.0** — Windows **x64** + **ARM64**
 
-> La beta pubblica è disponibile **solo per Windows x64**. La versione **ARM64** è un progetto separato, **ancora in fase di test e non distribuita**: i test su hardware ARM non hanno dato esito positivo, quindi non viene pubblicata finché non è pronta.
+Novità dalla beta7 (ultima versione pubblica precedente):
+- **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compariono in OneNote come previsto.
+- **Fogli Excel (`.xlsx`/`.xls`/`.xlsm`):** convertiti in PDF se Excel è installato.
+- **Email con solo corpo HTML:** le `.eml`/`.msg` senza testo semplice ora vengono convertite in PDF invece di finire come allegato originale.
+- **ZIP con compressione Deflate64:** gli ZIP creati da «Cartella compressa» di Windows o da 7-Zip ora vengono sempre aperti.
+- **Archivi dentro archivi:** un `.zip`/`.rar` dentro un altro archivio viene ora estratto e convertito anch'esso (fino a 8 livelli).
+- **File `.rar` più affidabile:** individuazione automatica di UnRAR, con estrattore alternativo di riserva.
+- **File temporaneamente bloccati:** se un file è occupato da antivirus o indicizzazione, l'elaborazione riprova automaticamente invece di scartarlo.
+- **Avvio di OneNote più rapido:** OneNote si scalda in background durante la selezione file; il ritardo alla finestra di destinazione è quasi azzerato.
+- **ARM64 distribuita pubblicamente:** la versione per Windows on ARM ha superato tutti i test su hardware reale ed è ora disponibile.
+- **Python 3.13.12** (serie in manutenzione attiva con installer Windows ufficiale per x64 e ARM64).
 
 Novità della beta7:
-- **Più scorrevole:** ora si scelgono i file **e** la sezione di OneNote all'inizio, poi conversione e caricamento procedono **da soli**, senza più "Premi Invio" intermedi; a fine operazione la finestra si chiude automaticamente.
-- **Riepilogo finale:** al termine viene mostrato un riepilogo con gli eventuali errori, salvato anche nel file `riepilogo_ultima_operazione.txt` nella cartella del programma.
-- **Avvio automatico di OneNote:** se OneNote non è aperto, viene avviato automaticamente (resta più rapido tenerlo già aperto).
-- **Ripresa dei caricamenti interrotti:** i file vengono caricati e rimossi uno a uno; se l'operazione si interrompe, al riavvio puoi **riprendere** caricando solo i file mancanti — senza doppioni e senza che i file non caricati finiscano nel Cestino.
+- Flusso scorrevole (scelte all'inizio, nessun "Premi Invio", chiusura automatica), riepilogo finale con log degli errori, avvio automatico di OneNote, ripresa dei caricamenti interrotti.
 
 Novità della beta6:
-- **Stabilità file .msg con .eml allegata:** una PEC inoltrata come `.msg` con la mail originale in allegato `.eml` ora viene elaborata correttamente. Prima causava un errore e l'intero file veniva saltato.
-- **Sicurezza email annidate:** aggiunto un limite di profondità (50 livelli) per i messaggi `message/rfc822` annidati. Un file con annidamento eccessivo non causa più un crash; il messaggio più profondo viene allegato come `.eml` originale senza perdita di dati.
+- Stabilità file `.msg` con `.eml` allegata; limite di profondità per email annidate (anti-crash).
 
 Novità della beta5:
-- **Controllo aggiornamenti integrato:** all'avvio il programma verifica (in modo silenzioso e non bloccante) se è disponibile una versione più recente e, in tal caso, mostra un avviso con il link per scaricarla.
-- **Punto di ripristino con feedback:** durante l'installazione la creazione del punto di ripristino mostra ora una finestra visibile con lo stato di avanzamento (prima girava nascosta e l'installer sembrava bloccato).
+- Controllo aggiornamenti integrato; punto di ripristino con feedback visivo durante l'installazione.
 
 Novità della beta4:
-- **Robustezza percorsi:** lo spostamento dei file nel Cestino ora funziona anche se il percorso utente contiene un apostrofo (es. `Dell'Aquila`).
-- **Sicurezza archivi:** gli archivi `.arj` sorgente troppo grandi (oltre 500 MB) vengono rifiutati prima dell'estrazione, evitando che un archivio molto compresso riempia il disco.
+- Robustezza percorsi con apostrofo; sicurezza archivi `.arj` di grandi dimensioni.
 
 Novità della beta3:
-- **Sicurezza:** Python aggiornato alla 3.12.10 (ultima patch ufficiale con installer Windows). All'avvio della conversione, se la libreria `defusedxml` non è presente, viene mostrato un avviso (il parsing XML userebbe altrimenti un fallback meno sicuro).
+- Python aggiornato a serie 3.13; avviso se la libreria `defusedxml` non è installata.
 
 Novità della beta2:
-- **Stabilità archivi:** anche i file dentro uno ZIP/RAR/ARJ che non si riescono a convertire (es. un `.doc` senza Word) vengono ora inseriti in OneNote come allegato, invece di essere ignorati.
+- I file dentro un archivio non convertibili vengono inseriti come allegato invece di essere ignorati.
 
 Novità della beta1:
-- **Più veloce:** i documenti vengono uniti in un unico PDF mantenendo il testo (niente più doppia conversione in immagini). L'inserimento in OneNote usa un'attesa intelligente al posto delle pause fisse.
-- **Testo ricercabile:** i PDF prodotti mantengono il testo selezionabile dove possibile.
-- **Più stabile:** Microsoft Word viene avviato una sola volta per tutto il fascicolo; gli allegati delle email non convertibili vengono comunque inseriti in OneNote come allegato (con il nome del file) invece di essere scartati.
+- PDF con testo selezionabile; Word avviato una sola volta per tutto il fascicolo; allegati per i formati non supportati.
 
-Riepilogo delle versioni alpha precedenti:
-- **alpha16:** installazione di Python robusta (installa se mancante, rilevamento via registro, diagnostica).
-- **alpha13-15:** conversione `.doc` via Microsoft Word; correzioni avvio e installazione Python.
-- **alpha11-12:** interfaccia grafica con drag & drop, punto di ripristino, hardening sicurezza (anti-XXE, anti zip-slip/zip-bomb, escape XML), allegati per i formati non convertibili.
+Riepilogo versioni alpha (storico sintetico):
+- **alpha16:** installazione Python robusta (rilevamento via registro, diagnostica).
+- **alpha13-15:** conversione `.doc` via Microsoft Word; correzioni avvio.
+- **alpha11-12:** interfaccia grafica con drag & drop, punto di ripristino, hardening sicurezza (anti-XXE, anti zip-slip/zip-bomb, escape XML), allegati per formati non convertibili.
