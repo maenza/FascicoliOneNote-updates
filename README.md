@@ -19,13 +19,6 @@
 
 ---
 
-## Scarica il programma
-
-| Versione | Piattaforma | Download |
-|---|---|---|
-| **1.0** | Windows x64 (Intel/AMD) | [FascicoliOneNote_Setup.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup.exe) |
-| **1.0** | Windows ARM64 (Surface Pro X, Copilot+ PC) | [FascicoliOneNote_Setup_ARM64.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup_ARM64.exe) |
-
 ## Cosa fa, in breve
 
 1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
@@ -206,9 +199,14 @@ Documenti\
 
 ## Versione
 
-**1.0** — Windows **x64** + **ARM64**
+**1.1** — Windows **x64** + **ARM64**
 
-Novità dalla beta7 (ultima versione pubblica precedente):
+Novità della 1.1 (aggiornamento di sicurezza — installazione consigliata):
+- **Macro disattivate all'apertura dei documenti Office:** Word ed Excel vengono ora avviati con la sicurezza macro forzata al massimo, così le macro di un `.doc`/`.docx`/`.xls`/`.xlsm` **non** vengono eseguite durante la conversione. Poiché i documenti elaborati arrivano spesso da terzi (allegati PEC, `.p7m`, archivi), un file con macro malevole non può più eseguire codice sul computer.
+- **Controllo aggiornamenti più sicuro:** il link di download proposto viene aperto solo se è un indirizzo `https://`.
+
+Novità della 1.0:
+- **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compariono in OneNote come previsto.
 - **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compariono in OneNote come previsto.
 - **Fogli Excel (`.xlsx`/`.xls`/`.xlsm`):** convertiti in PDF se Excel è installato.
 - **Email con solo corpo HTML:** le `.eml`/`.msg` senza testo semplice ora vengono convertite in PDF invece di finire come allegato originale.
