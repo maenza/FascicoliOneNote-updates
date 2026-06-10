@@ -19,6 +19,14 @@
 
 ---
 
+## Scarica il programma
+
+- **Windows x64** (la maggior parte dei PC): [FascicoliOneNote_Setup.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup.exe)
+- **Windows on ARM** (es. Surface con Snapdragon): [FascicoliOneNote_Setup_ARM64.exe](https://github.com/maenza/FascicoliOneNote-updates/releases/latest/download/FascicoliOneNote_Setup_ARM64.exe)
+
+Tutte le versioni e le note di rilascio: [pagina delle release](https://github.com/maenza/FascicoliOneNote-updates/releases).
+
+---
 ## Cosa fa, in breve
 
 1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
@@ -199,15 +207,21 @@ Documenti\
 
 ## Versione
 
-**1.1** — Windows **x64** + **ARM64**
+**1.2** — Windows **x64** + **ARM64**
+
+Novità della 1.2 (aggiornamento di sicurezza e stabilità — installazione consigliata):
+- **Finestra nitida sugli schermi ad alta risoluzione:** la finestra di selezione file ora si adatta alla scala del monitor (125%, 150%, …). Prima, passando tra monitor con risoluzioni diverse, appariva piccola e sfocata.
+- **Librerie sempre aggiornate:** l'installer aggiorna le librerie Python anche sulle installazioni esistenti, così le correzioni di sicurezza arrivano a tutti a ogni aggiornamento.
+- **Estrazione archivi più sicura:** il limite anti «zip-bomb» è ora applicato ai byte realmente estratti, anche con archivi che dichiarano dimensioni false.
+- **Riconoscimento file più preciso:** corretto il riconoscimento dei documenti RTF e dei file XML con BOM.
+- **Robustezza:** limite di lettura sul manifest degli aggiornamenti; estrazione di sistema abbandonata dopo 30 s se improduttiva; in caso di errore grave nella conversione gli originali NON vengono più spostati nel Cestino.
 
 Novità della 1.1 (aggiornamento di sicurezza — installazione consigliata):
 - **Macro disattivate all'apertura dei documenti Office:** Word ed Excel vengono ora avviati con la sicurezza macro forzata al massimo, così le macro di un `.doc`/`.docx`/`.xls`/`.xlsm` **non** vengono eseguite durante la conversione. Poiché i documenti elaborati arrivano spesso da terzi (allegati PEC, `.p7m`, archivi), un file con macro malevole non può più eseguire codice sul computer.
 - **Controllo aggiornamenti più sicuro:** il link di download proposto viene aperto solo se è un indirizzo `https://`.
 
 Novità della 1.0:
-- **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compariono in OneNote come previsto.
-- **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compariono in OneNote come previsto.
+- **Allegati `.p7m` (PEC) estratti correttamente:** un bug silenzioso causava la perdita del PDF estratto da un `.p7m`; ora compaiono in OneNote come previsto.
 - **Fogli Excel (`.xlsx`/`.xls`/`.xlsm`):** convertiti in PDF se Excel è installato.
 - **Email con solo corpo HTML:** le `.eml`/`.msg` senza testo semplice ora vengono convertite in PDF invece di finire come allegato originale.
 - **ZIP con compressione Deflate64:** gli ZIP creati da «Cartella compressa» di Windows o da 7-Zip ora vengono sempre aperti.
