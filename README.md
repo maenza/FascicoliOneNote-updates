@@ -27,6 +27,7 @@
 Tutte le versioni e le note di rilascio: [pagina delle release](https://github.com/maenza/FascicoliOneNote-updates/releases).
 
 ---
+
 ## Cosa fa, in breve
 
 1. Apre una finestra grafica dove scegli i file da elaborare, da qualsiasi cartella del computer — **non serve copiarli a mano** nella cartella `input`, e gli originali non vengono toccati
@@ -207,7 +208,10 @@ Documenti\
 
 ## Versione
 
-**1.2** — Windows **x64** + **ARM64**
+**1.3** — Windows **x64** + **ARM64**
+
+Novità della 1.3 (aggiornamento di sicurezza — installazione consigliata):
+- **Allegati video e audio più sicuri:** i nomi dei file video e audio provenienti da email, PEC, `.msg` e archivi vengono ripuliti dai percorsi prima del salvataggio, così un allegato con un nome costruito ad arte (es. `..\..\evil.mp4`) non può far scrivere file fuori dalla cartella di lavoro (path traversal).
 
 Novità della 1.2 (aggiornamento di sicurezza e stabilità — installazione consigliata):
 - **Finestra nitida sugli schermi ad alta risoluzione:** la finestra di selezione file ora si adatta alla scala del monitor (125%, 150%, …). Prima, passando tra monitor con risoluzioni diverse, appariva piccola e sfocata.
