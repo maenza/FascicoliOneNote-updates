@@ -208,7 +208,12 @@ Documenti\
 
 ## Versione
 
-**1.3** — Windows **x64** + **ARM64**
+**1.4** — Windows **x64** + **ARM64**
+
+Novità della 1.4 (aggiornamento di sicurezza — installazione consigliata):
+- **Estrazione archivi: le difese non sono più aggirabili dal ripiego.** Quando un archivio ZIP/RAR veniva bloccato dalle protezioni anti «zip-bomb» o anti «zip-slip», il programma ripiegava sugli estrattori di sistema (bsdtar / cartelle compresse di Windows) che estraevano comunque l'archivio malevolo, vanificando la difesa. Ora un archivio respinto **per sicurezza** viene saltato senza ripiego; il ripiego resta solo per i veri errori di formato/compressione. Inoltre i nomi dei file interni sono validati prima di affidare l'archivio a un estrattore esterno (zip-slip bloccato anche su quella via).
+- **Email annidate senza duplicati:** nelle PEC inoltrate i corpi delle email interne venivano elaborati due volte, producendo pagine OneNote duplicate; ora ogni messaggio annidato produce una sola pagina.
+- **Aggiornamento corretto su Windows on ARM:** il link proposto dal controllo aggiornamenti ora punta all'installer ARM64 sui PC ARM.
 
 Novità della 1.3 (aggiornamento di sicurezza — installazione consigliata):
 - **Allegati video e audio più sicuri:** i nomi dei file video e audio provenienti da email, PEC, `.msg` e archivi vengono ripuliti dai percorsi prima del salvataggio, così un allegato con un nome costruito ad arte (es. `..\..\evil.mp4`) non può far scrivere file fuori dalla cartella di lavoro (path traversal).
